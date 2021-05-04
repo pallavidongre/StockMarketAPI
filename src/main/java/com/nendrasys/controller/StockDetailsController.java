@@ -27,8 +27,9 @@ public class StockDetailsController {
                 return "getAllDetailsInDashboardPage";
             }
         } catch (NullPointerException e) {
+            model.addAttribute("error", "Details are not available, Please try again later");
 
-            return "errorPage";
+            return "getAllDetailsInDashboardPage";
         }
         return "errorPage";
     }
