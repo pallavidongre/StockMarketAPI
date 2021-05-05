@@ -13,12 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/")
-public class StockInformationController {
+public class StockInsertionController {
 
     @Autowired
     private StockDetailsService stockDetailsService;
 
-    Logger logger = Logger .getLogger(StockInformationController.class);
+    Logger logger = Logger .getLogger(StockInsertionController.class);
 
     @RequestMapping(value = "/addCompany")
     public ModelAndView addCompany() {
