@@ -1,7 +1,6 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title></title>
@@ -15,7 +14,7 @@
         }
 
         .login {
-            margin: 100px auto;
+            margin: 60px auto;
             width: 378px;
         }
 
@@ -84,7 +83,7 @@
 <div class="login">
     <div class="login-screen">
         <div class="app-title">
-            <h1>Stock Insertion</h1>
+            <h1>Stock Market Insertion</h1>
         </div>
         <c:url value="/saveCompany" var="save"></c:url>
         <div class="login-form">

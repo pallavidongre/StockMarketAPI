@@ -18,7 +18,7 @@ public class StockInsertionController {
     @Autowired
     private StockDetailsService stockDetailsService;
 
-    Logger logger = Logger .getLogger(StockInsertionController.class);
+    Logger logger = Logger.getLogger(StockInsertionController.class);
 
     @RequestMapping(value = "/addCompany")
     public ModelAndView addCompany() {
@@ -33,6 +33,6 @@ public class StockInsertionController {
     public String saveCompany(StockDetailsModel stockDetailsModel) {
         logger.info("Inside saveCompany method at StockInsertionController class");
         stockDetailsService.addStockToMarketList(stockDetailsModel);
-        return "redirect:/addCompany";
+        return "saveCompanySuccessPage";
     }
 }
