@@ -122,6 +122,7 @@
         </ul>
     </div>
 </nav>
+<jsp:include page="header.jsp"></jsp:include>
 <center>
     <h1 style="color: red">${msg}</h1>
 <div align="center"
@@ -158,5 +159,6 @@ style="margin-top: 70px; width:100%;height:140px;background-image: url('data:ima
 </div>
 </div>
 </center>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
