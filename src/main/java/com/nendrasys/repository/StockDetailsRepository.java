@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StockDetailsRepository extends JpaRepository<StockDetailsModel, Serializable> {
@@ -15,4 +16,7 @@ public interface StockDetailsRepository extends JpaRepository<StockDetailsModel,
 
     @Override
     List<StockDetailsModel> findAll();
+
+    @Override
+    Optional<StockDetailsModel> findById(Serializable serializable);
 }
