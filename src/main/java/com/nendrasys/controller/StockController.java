@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
-public class StockController  extends abstractController {
+public class StockController extends AbstractController {
 
     @Autowired
     private StockDetailsRepository stockDetailsRepository;
@@ -23,49 +24,53 @@ public class StockController  extends abstractController {
     private PersonalDetailRepository personalDetailRepository;
 
     @GetMapping("/stockDetail")
-    public ModelAndView stockDetail(@RequestParam("id") Integer id, Model model)
-    {
+    public ModelAndView stockDetail(@RequestParam("id") Integer id) {
+        StockDetailsModel stockDetailsModel = null;
         logger.info("inside StockDetail method");
-        ModelAndView modelAndView=new ModelAndView("stockDetailPage");
-        try{
-            StockDetailsModel stockDetailsModel=stockDetailsRepository.findById(id).orElse(new StockDetailsModel());
-            model.addAttribute("stockDetailsModel",stockDetailsModel);
+        ModelAndView modelAndView = new ModelAndView("stockDetailPage");
+
+        stockDetailsModel = stockDetailsRepository.findById(id).orElse(null);
+        if (stockDetailsModel != null) {
+            modelAndView.addObject("stockDetailsModel", stockDetailsModel);
             return modelAndView;
-        } catch (NullPointerException e) {
-            logger.error("there is no stockDetail for this id='"+id+"'");
-            e.printStackTrace();
+        } else {
+            logger.error("there is no stockDetail for this id='" + id + "'");
+            modelAndView.addObject("mes", "Data not found for this id='" + id + "'");
         }
-          return null;
+        return modelAndView;
     }
+
     @PostMapping("/personalDetail")
-    public String personalDetail(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel,@RequestParam("id") Integer id,Model model)
-    {
+    public String personalDetail(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel, @RequestParam("id") Integer id, Model model) {
         stockDetailsRepository.saveAndFlush(stockDetailsModel);
         logger.info("inside personalDetail method");
-        model.addAttribute("id",id);
-        try{
-            StockDetailsModel stockDetailsModel1=stockDetailsRepository.findById(id).orElse(new StockDetailsModel());
-            model.addAttribute("stockDetailsModel",stockDetailsModel1);
-            model.addAttribute("personalDetail",new PersonalDetailModel());
+        model.addAttribute("id", id);
+
+        StockDetailsModel stockDetailsModel1 = stockDetailsRepository.findById(id).orElse(null);
+        if (stockDetailsModel1 != null && stockDetailsModel.getRequestQuantity() != null) {
+            model.addAttribute("stockDetailsModel", stockDetailsModel1);
+            model.addAttribute("personalDetail", new PersonalDetailModel());
             return "personalDetail";
-        } catch (NullPointerException e) {
-            logger.error("there is no stockDetail for this id='"+id+"'");
-            e.printStackTrace();
+        } else {
+            logger.error("there is no stockDetail for this id='" + id + "'");
+            model.addAttribute("personalDetail", new PersonalDetailModel());
+            model.addAttribute("msg", "Something Went Wrong try again from stockDetail page");
         }
-        return "error";
+
+        return "personalDetail";
     }
 
     @PostMapping("/personalDetailSaveToH2")
-    public String personalDetailSaveToH2(@ModelAttribute("personalDetail") PersonalDetailModel personalDetailModel,Model model)
-    {
+    public String personalDetailSaveToH2(@ModelAttribute("personalDetail") PersonalDetailModel personalDetailModel, Model model) {
         logger.info("inside personalDetailSaveToH2 method");
-               try{
-                   personalDetailRepository.save(personalDetailModel);
-                   model.addAttribute("success","successfully personal data is added");
-                   return "success";
-               } catch (NumberFormatException e) {
-                   e.printStackTrace();
-               }
+        if (personalDetailModel.getFullName() != null && personalDetailModel.getCompanyName() != null && !personalDetailModel.getContactNo().isEmpty() && personalDetailModel.getCountryName() != null &&
+                personalDetailModel.getAge() != null && personalDetailModel.getDate() != null && personalDetailModel.getEmail() != null && personalDetailModel.getRequestQuantity() != 0) {
+            PersonalDetailModel personalDetailModel1 = personalDetailRepository.save(personalDetailModel);
+            model.addAttribute("success", "successfully personal data is added");
+            return "success";
+        } else {
+            model.addAttribute("error", "Data not saved to h2 database");
+        }
         return "error";
     }
 }

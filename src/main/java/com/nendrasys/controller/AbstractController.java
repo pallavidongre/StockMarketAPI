@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-public abstract class abstractController {
-    public static final Logger logger = LogManager.getLogger(abstractController.class);
+public abstract class AbstractController {
+    public static final Logger logger = LogManager.getLogger(AbstractController.class);
 
     @ModelAttribute
     public void getBasicConfigurations()
