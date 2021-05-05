@@ -77,13 +77,16 @@
     </style>
 </head>
 <body>
+
+<!--header Page-->
+<jsp:include page="header.jsp"></jsp:include>
+
 <div class="login">
     <div class="login-screen">
         <div class="app-title">
-            <h1>Stock Market Company Registration</h1>
+            <h1>Stock Insertion</h1>
         </div>
         <c:url value="/saveCompany" var="save"></c:url>
-
         <div class="login-form">
             <form name='loginForm' action="${save}" method='POST'>
                 <div class="control-group">
@@ -108,5 +111,8 @@
 
     </div>
 </div>
+
+<!--footerPage---->
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

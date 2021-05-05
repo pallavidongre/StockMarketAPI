@@ -1,9 +1,6 @@
 package com.nendrasys.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "STOCKDETAILS")
@@ -11,6 +8,7 @@ public class StockDetailsModel {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "COMPANYNAME")

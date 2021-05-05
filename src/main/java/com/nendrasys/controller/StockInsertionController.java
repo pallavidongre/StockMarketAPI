@@ -23,7 +23,7 @@ public class StockInsertionController {
     @RequestMapping(value = "/addCompany")
     public ModelAndView addCompany() {
         BasicConfigurator.configure();
-        logger.info("Inside addCompany method at StockInformationController class");
+        logger.info("Inside addCompany method at StockInsertionController class");
         ModelAndView model = new ModelAndView();
         model.setViewName("stockAddPage");
         return model;
@@ -31,8 +31,8 @@ public class StockInsertionController {
 
     @RequestMapping(value = "/saveCompany", method = RequestMethod.POST)
     public String saveCompany(StockDetailsModel stockDetailsModel) {
-        logger.info("Inside saveCompany method at StockInformationController class");
+        logger.info("Inside saveCompany method at StockInsertionController class");
         stockDetailsService.addStockToMarketList(stockDetailsModel);
-        return "redirect:/getAllStockMarketInformation";
+        return "redirect:/addCompany";
     }
 }
