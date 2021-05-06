@@ -23,22 +23,29 @@ public class StockInsertionController {
     Logger logger = Logger.getLogger(StockInsertionController.class);
 
     @RequestMapping(value = "/addCompany")
-    public ModelAndView addCompany() {
+    public String addCompany(Model model) {
         BasicConfigurator.configure();
         logger.info("Inside addCompany method at StockInsertionController class");
-        ModelAndView model = new ModelAndView();
-        model.setViewName("stockAddPage");
-        return model;
+        model.addAttribute("stockDetailsModel", new StockDetailsModel());
+        return "stockAddPage";
     }
 
     @RequestMapping(value = "/saveCompany", method = RequestMethod.POST)
     public String saveCompany(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel, Model model) throws IllegalStateException {
         logger.info("Inside saveCompany method at StockInsertionController class");
+        String msg = null;
         try {
-            stockDetailsService.addStockToMarketList(stockDetailsModel);
+            StockDetailsModel stockDetailsModel1 = stockDetailsService.addStockToMarketList(stockDetailsModel);
+            if (stockDetailsModel1 != null) {
+                msg = "Added Company Successfully";
+            } else {
+                msg = "Failed To Add Stock Insertion Market Information";
+            }
+            model.addAttribute("msg", msg);
             return "saveCompanySuccessPage";
         } catch (Exception e) {
-            model.addAttribute("error","Something went wrong. Please try again.");
+            msg = "Failed To Add Stock Insertion Market Information";
+            model.addAttribute("msg", msg);
             return "saveCompanySuccessPage";
         }
     }

@@ -19,7 +19,7 @@
         }
 
         .login-screen {
-            background-color:#eeeee4;
+            background-color: #eeeee4;
             padding: 20px;
             border-radius: 5px
         }
@@ -70,6 +70,7 @@
             width: 250px;
             margin: 0 auto;
         }
+
         .btn:hover {
             background-color: #2980B9;
         }
@@ -87,25 +88,29 @@
         </div>
         <c:url value="/saveCompany" var="save"></c:url>
         <div class="login-form">
-            <form name='loginForm' action="${save}" method='POST'>
+            <form:form method="POST" action="${save}" modelAttribute="stockDetailsModel">
+                <div class="control-group" hidden>
+                    <form:input type="text" class="login-field" placeholder="COMPANY ID"
+                                path="id" id="login-name"/>
+                </div>
                 <div class="control-group">
-                    <input type="text" class="login-field" value="" placeholder="COMPANY NAME" name="companyName"
-                           id="login-name">
+                    <form:input type="text" class="login-field" placeholder="COMPANY NAME"
+                                path="companyName" id="login-name"/>
                 </div>
 
                 <div class="control-group">
-                    <input type="text" class="login-field" value="" placeholder="PRICE" name='price'
-                           id="login-price">
+                    <form:input type="text" class="login-field" placeholder="PRICE"
+                                path='price' id="login-price"/>
                 </div>
 
                 <div class="control-group">
-                    <input type="text" class="login-field" value="" placeholder="AVAILABLE SHARES" name='qty'
-                           id="login-qty">
+                    <form:input type="text" class="login-field" placeholder="AVAILABLE SHARES"
+                                path='qty' id="login-qty"/>
                 </div>
 
-                <input class="btn btn-primary btn-large btn-block" input name="submit" type="submit" value="INSERT"/>
+                <input class="btn btn-primary btn-large btn-block" type="submit" value="INSERT"/>
 
-            </form>
+            </form:form>
         </div>
 
     </div>
