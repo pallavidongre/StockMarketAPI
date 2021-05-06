@@ -144,8 +144,8 @@ ${message}
                         <f:label path="qty">Avaqty</f:label>
                         <f:input path="qty"></f:input>
                         <f:label path="requestQuantity">requestQuantity</f:label>
-                        <f:input path="requestQuantity"/>
-                        <a href="">TotalPrice</a><br>
+                        <f:input path="requestQuantity" type="text" id="qta_field" value="${item.value}"/>
+                        <a href='' onclick="this.href='totalPrice?price=${stockDetailsModel.price}&requestedQuantity${item.key.id}='+document.getElementById('qta_field').value">TotalPrice</a>
                         <f:button>PURCHASE</f:button>
                     </f:form>
                 </c:when>
@@ -153,11 +153,11 @@ ${message}
                     ${mes}
                 </c:otherwise>
             </c:choose>
-
         </div>
     </div>
 </center>
 <jsp:include page="footer.jsp"></jsp:include>
+
 
 </body>
 </html>

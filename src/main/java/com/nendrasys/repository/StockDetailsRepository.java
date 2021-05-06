@@ -18,8 +18,4 @@ public interface StockDetailsRepository extends JpaRepository<StockDetailsModel,
     List<StockDetailsModel> findAll();
 
 
-
-
-    @Override
-    Optional<StockDetailsModel> findById(Serializable serializable);
 }

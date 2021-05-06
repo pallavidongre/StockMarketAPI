@@ -7,11 +7,9 @@ import com.nendrasys.repository.StockDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 @Controller
@@ -23,8 +21,8 @@ public class StockController extends AbstractController {
     @Autowired
     private PersonalDetailRepository personalDetailRepository;
 
-    @GetMapping("/stockDetail")
-    public ModelAndView stockDetail(@RequestParam("id") Integer id) {
+    @GetMapping("/stockDetail/{id}")
+    public ModelAndView stockDetail(@PathVariable("id") Integer id) {
         StockDetailsModel stockDetailsModel = null;
         logger.info("inside StockDetail method");
         ModelAndView modelAndView = new ModelAndView("stockDetailPage");
@@ -44,8 +42,6 @@ public class StockController extends AbstractController {
     public String personalDetail(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel, @RequestParam("id") Integer id, Model model) {
         stockDetailsRepository.saveAndFlush(stockDetailsModel);
         logger.info("inside personalDetail method");
-        model.addAttribute("id", id);
-
         StockDetailsModel stockDetailsModel1 = stockDetailsRepository.findById(id).orElse(null);
         if (stockDetailsModel1 != null && stockDetailsModel.getRequestQuantity() != null) {
             model.addAttribute("stockDetailsModel", stockDetailsModel1);
@@ -53,11 +49,9 @@ public class StockController extends AbstractController {
             return "personalDetail";
         } else {
             logger.error("there is no stockDetail for this id='" + id + "'");
-            model.addAttribute("personalDetail", new PersonalDetailModel());
             model.addAttribute("msg", "Something Went Wrong try again from stockDetail page");
         }
-
-        return "personalDetail";
+        return "redirect:/stockDetail/"+id+"";
     }
 
     @PostMapping("/personalDetailSaveToH2")
@@ -66,11 +60,16 @@ public class StockController extends AbstractController {
         if (personalDetailModel.getFullName() != null && personalDetailModel.getCompanyName() != null && !personalDetailModel.getContactNo().isEmpty() && personalDetailModel.getCountryName() != null &&
                 personalDetailModel.getAge() != null && personalDetailModel.getDate() != null && personalDetailModel.getEmail() != null && personalDetailModel.getRequestQuantity() != 0) {
             PersonalDetailModel personalDetailModel1 = personalDetailRepository.save(personalDetailModel);
-            model.addAttribute("success", "successfully personal data is added");
-            return "success";
+            if(personalDetailModel1!=null)
+            {
+                model.addAttribute("success", "successfully personal data is added");
+                return "success";
+            }
         } else {
             model.addAttribute("error", "Data not saved to h2 database");
         }
         return "error";
     }
+
+
 }
