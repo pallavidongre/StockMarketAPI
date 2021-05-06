@@ -12,7 +12,7 @@ public class StockDetailsServiceImpl implements StockDetailsService {
     private StockDetailsRepository stockDetailsRepository;
 
     @Override
-    public StockDetailsModel addStockToMarketList(StockDetailsModel stockDetailsModel) {
+    public StockDetailsModel addStockToMarketList(StockDetailsModel stockDetailsModel) throws IllegalStateException {
       return stockDetailsRepository.save(stockDetailsModel);
     }
 

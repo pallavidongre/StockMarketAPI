@@ -11,6 +11,8 @@
 <br>
 <br>
 <h3><strong style="color: forestgreen"><b> Company Added In Stock Market successfully...</b></strong></h3>
+<br>
+<strong style="color: red"><b>${error}</b></strong>
 
 <!--footerPage---->
 <jsp:include page="footer.jsp"></jsp:include>

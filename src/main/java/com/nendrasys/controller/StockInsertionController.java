@@ -6,6 +6,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,9 +32,14 @@ public class StockInsertionController {
     }
 
     @RequestMapping(value = "/saveCompany", method = RequestMethod.POST)
-    public String saveCompany(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel) {
+    public String saveCompany(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel, Model model) throws IllegalStateException {
         logger.info("Inside saveCompany method at StockInsertionController class");
-        stockDetailsService.addStockToMarketList(stockDetailsModel);
-        return "saveCompanySuccessPage";
+        try {
+            stockDetailsService.addStockToMarketList(stockDetailsModel);
+            return "saveCompanySuccessPage";
+        } catch (Exception e) {
+            model.addAttribute("error","Something went wrong. Please try again.");
+            return "saveCompanySuccessPage";
+        }
     }
 }
