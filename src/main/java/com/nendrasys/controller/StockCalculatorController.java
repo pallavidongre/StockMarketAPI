@@ -13,5 +13,6 @@ public class StockCalculatorController {
         Double totalPrice= price*qty;
         model.addAttribute("totalPrice", totalPrice);
         return "totalPrice";
+
     }
 }
