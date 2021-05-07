@@ -10,7 +10,6 @@ public class StockCalculatorController {
 
     @RequestMapping("/totalPrice/{price}/{qty}")
     public String calculateStockPrice(Model model, @PathVariable Double price, @PathVariable int qty){
-
         Double totalPrice= price*qty;
         model.addAttribute("totalPrice", totalPrice);
         return "totalPrice";
