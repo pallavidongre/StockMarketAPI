@@ -32,7 +32,7 @@ public class StockInsertionController {
 
     @RequestMapping(value = "/saveCompany", method = RequestMethod.POST)
     public String saveCompany(@ModelAttribute("stockDetailsModel") StockDetailsModel stockDetailsModel, Model model) throws IllegalStateException {
-        logger.info("Inside saveCompany method at StockMarketApl In StockInsertionController class");
+        logger.info("Inside saveCompany method In StockInsertionController class");
         String msg = null;
         try {
             StockDetailsModel stockDetailsModel1 = stockDetailsService.addStockToMarketList(stockDetailsModel);
