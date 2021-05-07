@@ -12,21 +12,15 @@ import java.util.List;
 public class StockDetailsServiceImpl implements StockDetailsService {
 
     @Autowired
-
     private StockDetailsRepository stockDetailsRepository;
 
     @Override
-    public StockDetailsModel addStockToMarketList(StockDetailsModel stockDetailsModel) throws IllegalStateException {
-      return stockDetailsRepository.save(stockDetailsModel);
+    public List<StockDetailsModel> getAllDetailsInDashboard() {
+        return stockDetailsRepository.findAll();
     }
 
-
-
-    StockDetailsRepository stockDetailsRepository;
-
     @Override
-    public List<StockDetailsModel> getAllDetailsInDashboard() {
-
-        return stockDetailsRepository.findAll();
+    public StockDetailsModel addStockToMarketList(StockDetailsModel stockDetailsModel) throws IllegalStateException {
+        return stockDetailsRepository.save(stockDetailsModel);
     }
 }

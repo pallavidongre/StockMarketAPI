@@ -2,11 +2,13 @@ package com.nendrasys.service;
 
 import com.nendrasys.model.StockDetailsModel;
 
+import java.util.List;
+
 
 public interface StockDetailsService {
 
-    public StockDetailsModel addStockToMarketList(StockDetailsModel stockDetailsModel);
-
     List<StockDetailsModel> getAllDetailsInDashboard();
+
+    public StockDetailsModel addStockToMarketList(StockDetailsModel stockDetailsModel);
 
 }
