@@ -22,6 +22,17 @@ public class StockDetailsModel {
     @Column(name = "QTY")
     private Integer qty;
 
+    @Column(name = "ReqQ")
+    private Integer requestQuantity;
+
+    public Integer getRequestQuantity() {
+        return requestQuantity;
+    }
+
+    public void setRequestQuantity(Integer requestQuantity) {
+        this.requestQuantity = requestQuantity;
+    }
+
     public Integer getId() {
         return id;
     }
