@@ -12,7 +12,6 @@ public class HomePageController {
         return "homepage";
     }
 
-
     @GetMapping("/header")
     public String headerPage(){
 

@@ -4,7 +4,8 @@ import com.nendrasys.model.PersonalDetailModel;
 import com.nendrasys.model.StockDetailsModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.jpa.repository.Query;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
