@@ -322,7 +322,7 @@
                 <th>${stockDetailsModel.price}</th>
                 <th>${stockDetailsModel.qty}</th>
                 <c:url value="/stockdetails" var="stockdetails"/>
-                <th><a href="${stockdetails}?stockdetail=${stockDetailsModel.id}">Details</a></th>
+                <th><a href="${stockdetails}/${stockDetailsModel.id}">Details</a></th>
             </tr>
         </c:forEach>
         </tbody>

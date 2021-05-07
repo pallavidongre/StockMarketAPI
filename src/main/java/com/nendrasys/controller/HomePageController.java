@@ -12,21 +12,4 @@ public class HomePageController {
         return "homepage";
     }
 
-    @GetMapping("/header")
-    public String headerPage(){
-
-        return "header";
-    }
-
-    @GetMapping("/footer")
-    public String footerPage(){
-
-        return "footer";
-    }
-
-    @GetMapping("/homeimage")
-    public String homeimage(){
-
-        return "homeimage";
-    }
 }
